@@ -1,0 +1,12 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+
+# Logs, Build-Artefakte
+**/*.log
+hs_err_pid*
