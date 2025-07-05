@@ -1,20 +1,30 @@
 package com.sltgruppeq.tictactoe;
 
 public class Board {
-    // 3×3 Feld initial leer (Space = leer)
-    private final char[][] cells = new char[3][3];
+    // Das 3×3-Spielfeld
+    // package-private, damit TicTacToe.hasWinner() direkt darauf zugreifen kann
+    final char[][] cells = new char[3][3];
 
     public Board() {
         clear();
     }
 
-    /** True, wenn die Zelle (x,y) noch frei ist. */
+    /** Setzt alle Zellen auf leer (' '). */
+    public void clear() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cells[i][j] = ' ';
+            }
+        }
+    }
+
+    /** Gibt true zurück, wenn die Zelle (x,y) noch leer ist. */
     public boolean isCellEmpty(int x, int y) {
         return cells[x][y] == ' ';
     }
 
     /**
-     * Platziert den Marker in (x,y).
+     * Platziert den Marker in Zelle (x,y).
      * @throws IllegalArgumentException, wenn die Zelle nicht leer ist.
      */
     public void place(int x, int y, char marker) {
@@ -24,16 +34,17 @@ public class Board {
         cells[x][y] = marker;
     }
 
-    /** Setzt das Board auf Anfangszustand (alles leer). */
-    public void clear() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cells[i][j] = ' ';
+    /** Gibt true zurück, wenn alle Zellen belegt sind. */
+    public boolean isFull() {
+        for (char[] row : cells) {
+            for (char c : row) {
+                if (c == ' ') return false;
             }
         }
+        return true;
     }
 
-    /** Gibt das Spielfeld in der Konsole aus. */
+    /** Druckt das Spielfeld mit Box-Zeichen in der Konsole. */
     public void print() {
         System.out.println("┌───┬───┬───┐");
         for (int i = 0; i < 3; i++) {
