@@ -12,44 +12,51 @@ public class TicTacToe {
 
     public void start() {
         Scanner sc = new Scanner(System.in);
-        board.clear();
 
-        while (true) {
-            // US-02: Aktuellen Spielstand anzeigen
-            board.print();
-            System.out.println("Current Player: " + currentPlayer.getMarker());
+        do {
+            board.clear();
+            currentPlayer = player1;
 
-            // Input abfragen
-            System.out.print("row (0-2): ");
-            int x = sc.nextInt();
-            System.out.print("column (0-2): ");
-            int y = sc.nextInt();
-
-            // US-01: Move placement with validation
-            try {
-                board.place(x, y, currentPlayer.getMarker());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Ungültiger Zug – Feld bereits belegt! Bitte erneut versuchen.");
-                continue;
-            }
-
-            // US-03: Auf Sieg prüfen
-            if (hasWinner()) {
+            while (true) {
                 board.print();
-                System.out.println("Spielende: Spieler " + currentPlayer.getMarker() + " hat gewonnen!");
-                return;
+                System.out.println("Current Player: " + currentPlayer.getMarker());
+
+                System.out.print("row (0-2): ");
+                int x = sc.nextInt();
+                System.out.print("column (0-2): ");
+                int y = sc.nextInt();
+
+                // US-01: Move machen
+                try {
+                    board.place(x, y, currentPlayer.getMarker());
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Ungültiger Zug – Feld bereits belegt! Bitte erneut versuchen.");
+                    continue;
+                }
+
+                // US-03: Sieg prüfen
+                if (hasWinner()) {
+                    board.print();
+                    System.out.println("Spielende: Spieler " + currentPlayer.getMarker() + " hat gewonnen!");
+                    break;
+                }
+
+                // US-03: Unentschieden prüfen
+                if (board.isFull()) {
+                    board.print();
+                    System.out.println("Unentschieden!");
+                    break;
+                }
+
+                // Spieler wechseln
+                switchCurrentPlayer();
             }
 
-            // US-03: Auf Unentschieden prüfen
-            if (board.isFull()) {
-                board.print();
-                System.out.println("Unentschieden!");
-                return;
-            }
-
-            // Spieler wechseln
-            switchCurrentPlayer();
-        }
+            // --- US-04: Neues Spiel starten ---
+            System.out.print("Nochmal spielen? (j/n): ");
+        } while (sc.next().equalsIgnoreCase("j"));
+        System.out.println("Danke fürs Spielen!");
+        sc.close();
     }
 
     private void switchCurrentPlayer() {
@@ -58,7 +65,7 @@ public class TicTacToe {
 
     public boolean hasWinner() {
         char m = currentPlayer.getMarker();
-        char[][] c = board.cells;  // package‐private Zugriff möglich
+        char[][] c = board.cells;
 
         // Reihen prüfen
         for (int i = 0; i < 3; i++)
