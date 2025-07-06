@@ -3,10 +3,11 @@ package com.sltgruppeq.tictactoe;
 import java.util.Scanner;
 
 public class TicTacToe {
+    public static Board board;
     private final Player player1 = new Player('X');
     private final Player player2 = new Player('O');
-    private Player currentPlayer = player1;
-    private final Board board = new Board();
+    public Player currentPlayer = player1;
+
 
     public TicTacToe() { }
 
@@ -59,7 +60,7 @@ public class TicTacToe {
         sc.close();
     }
 
-    private void switchCurrentPlayer() {
+    public void switchCurrentPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
