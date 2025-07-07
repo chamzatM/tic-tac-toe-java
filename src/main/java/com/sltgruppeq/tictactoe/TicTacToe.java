@@ -4,10 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe {
+    public Board board = new Board(); //geändert öffentlich (merge Konflikt lokal gelöst
     private final Player player1 = new Player('X');
     private final Player player2 = new Player('O');
-    private Player currentPlayer = player1;
-    public static final Board board = new Board();
+    public Player currentPlayer = player1;   // öffentlich (Merge Konflikt lokal gelöst)
 
     public TicTacToe() { }
 
@@ -95,7 +95,7 @@ public class TicTacToe {
         sc.close();
     }
 
-    private void switchCurrentPlayer() {
+    public void switchCurrentPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
