@@ -51,6 +51,18 @@ class TicTacToeTest {
         assertNotEquals(current, afterSwitch);
     }
 
+    @Test
+    void test_switchCurrentPlayer_togglesBackAfterTwoSwitches() {
+        TicTacToe game = new TicTacToe();
+        Player startPlayer = game.currentPlayer;
 
-  
+        game.switchCurrentPlayer(); // -> zu Player 2
+        game.switchCurrentPlayer(); // -> zurück zu Player 1
+
+        assertEquals(startPlayer, game.currentPlayer);
+    }
+
+
+
+
 }

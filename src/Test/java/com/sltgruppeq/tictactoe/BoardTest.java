@@ -77,6 +77,14 @@ class BoardTest {
     }
 
     @Test
+    void test_clear_doesNotThrowOnEmptyBoard() {
+        Board board = new Board();
+        // clear auf leerem Board sollte kein Fehler verursachen
+        assertDoesNotThrow(board::clear);
+    }
+
+
+    @Test
     void test_isFullreturnsFalsewhenEmpty() {
         Board board = new Board();
         assertEquals(false, board.isFull());
