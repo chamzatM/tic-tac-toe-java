@@ -6,18 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class TicTacToeTest {
     @Test
     void test_hasWinner(){
-        TicTacToe testTicTacToe = new TicTacToe ();
+        TicTacToe testTicTacToe = new TicTacToe();
 
-        assertEquals(false,testTicTacToe.hasWinner());
+        assertFalse(testTicTacToe.hasWinner());
 
-        TicTacToe.board.place(0,0,'X');
-        TicTacToe.board.place(0,1,'X');
+        testTicTacToe.board.place(0, 0, 'X');
+        testTicTacToe.board.place(0, 1, 'X');
 
-        assertEquals(false,testTicTacToe.hasWinner());
+        assertFalse(testTicTacToe.hasWinner());
 
-        TicTacToe.board.place(0,2,'X');
+        testTicTacToe.board.place(0, 2, 'X');
 
-        assertEquals(true,testTicTacToe.hasWinner());
+        assertTrue(testTicTacToe.hasWinner());
 
     }
     @Test // DiagonalTest

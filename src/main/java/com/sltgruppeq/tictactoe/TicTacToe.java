@@ -1,13 +1,13 @@
 package com.sltgruppeq.tictactoe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe {
-    public static Board board;
+    public Board board = new Board(); //geändert öffentlich (merge Konflikt lokal gelöst
     private final Player player1 = new Player('X');
     private final Player player2 = new Player('O');
-    public Player currentPlayer = player1;
-
+    public Player currentPlayer = player1;   // öffentlich (Merge Konflikt lokal gelöst)
 
     public TicTacToe() { }
 
@@ -22,10 +22,45 @@ public class TicTacToe {
                 board.print();
                 System.out.println("Current Player: " + currentPlayer.getMarker());
 
-                System.out.print("row (0-2): ");
-                int x = sc.nextInt();
-                System.out.print("column (0-2): ");
-                int y = sc.nextInt();
+
+               int x=0;
+                boolean b = true;
+                boolean scanagain=false;
+
+              do {
+                  b = false;
+                  try {
+                      if (scanagain) {sc.nextLine();}
+                      System.out.print("row (0-2): ");
+                      x = sc.nextInt();
+                  } catch (InputMismatchException e) {
+                      System.out.println("Zahl zwischen 0 und 2 eingeben! Bitte erneut versuchen.");
+                      b = true;
+                      scanagain = true;
+                      continue;
+
+                  }
+              }
+              while (b);
+
+                int y=0;
+                b= true;
+                scanagain=false;
+
+                do {
+                    b = false;
+                    try {
+                        if (scanagain){sc.nextLine();}
+                        System.out.print("column (0-2): ");
+                        y = sc.nextInt();
+                    } catch (InputMismatchException e){
+                        System.out.println("Zahl zwischen 0 und 2 eingeben! Bitte erneut versuchen.");
+                        b = true;
+                        scanagain = true;
+                        continue;
+                    }
+                }
+                while (b);
 
                 // US-01: Move machen
                 try {
